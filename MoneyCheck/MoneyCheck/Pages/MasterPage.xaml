@@ -1,0 +1,72 @@
+﻿<MasterDetailPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MoneyCheck.Pages.MasterPage" Title="Try">
+
+
+    <MasterDetailPage.Master>
+        <ContentPage Title="Menu">
+            <StackLayout Padding="20">
+                <StackLayout.Background>
+                    <LinearGradientBrush StartPoint="0.03,0.45" EndPoint="1.9,1.45">
+                        <GradientStop Color="White"
+                          Offset="0.1" />
+                        <GradientStop Color="#9F9F9F"
+                          Offset="1.0" />
+                    </LinearGradientBrush>
+
+                </StackLayout.Background>
+                <Label Text="Меню" VerticalTextAlignment="Center" HorizontalTextAlignment="Center" FontAttributes="Bold" FontSize="30" Padding="3" TextColor="Black"/>
+
+                <Button Text="Главная" TextColor="White" FontAttributes="Bold" Style="{StaticResource buttonStyle}"/>
+                <Button Text="Статистика" TextColor="White" FontAttributes="Bold" Style="{StaticResource buttonStyle}"/>
+                <Button Text="Расчёты" TextColor="White" FontAttributes="Bold" Style="{StaticResource buttonStyle}"/>
+                <Button Text="О нас" TextColor="White" FontAttributes="Bold" Style="{StaticResource buttonStyle}"/>
+            </StackLayout>
+        </ContentPage>
+    </MasterDetailPage.Master>
+    <MasterDetailPage.Detail >
+        <NavigationPage>
+            <x:Arguments>
+                <ContentPage Title="Контроль расходов">
+                    <StackLayout Padding="15" Background="#F4F4F4">
+                        <Frame CornerRadius="24" Grid.ColumnSpan="2">
+                            <StackLayout Padding="10">
+                                <Label Text="Ваш счёт:" TextColor="Black" FontSize="18"/>
+                                <Label Text="0 рублей" TextColor="#B122F4" FontSize="26"/>
+                                <Label Text="Проноз на следующий месяц:" TextColor="Black" FontSize="18"/>
+                                <Label Text="0 рублей" TextColor="#2EC321" FontSize="26"/>
+                                <Label Text="Сегодня потрачено: " FontSize="18" TextColor="Black"/>
+                                <Label Text="0 рублей" TextColor="#DE3842" FontSize="26"/>
+                            </StackLayout>
+                        </Frame>
+
+                        <Label Text=""/>
+                        <Label Text=""/>
+                        <Label Text="Ваши покупки" TextColor="Black" FontSize="22" HorizontalOptions="Center" FontAttributes="Bold"/>
+                       
+                        
+                        <Frame CornerRadius="24" Grid.ColumnSpan="2" Padding="5">
+                            <ScrollView>
+                                <StackLayout x:Name="MyTransactions" Padding="10">
+
+                                </StackLayout>
+                            </ScrollView>
+                        </Frame>
+
+                        <Label Text=""/>
+                        <Label Text="Ваши должники" TextColor="Black" FontSize="22" HorizontalOptions="Center" FontAttributes="Bold"/>
+
+
+                        <Frame CornerRadius="24" Grid.ColumnSpan="2" Padding="5">
+                            <ScrollView>
+                                <StackLayout x:Name="MyDebtors" Padding="10">
+                                   
+                                </StackLayout>
+                            </ScrollView>
+                        </Frame>
+                    </StackLayout>
+                </ContentPage>
+            </x:Arguments>
+        </NavigationPage>
+    </MasterDetailPage.Detail>
+</MasterDetailPage>
