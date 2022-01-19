@@ -9,6 +9,8 @@ using System.Text;
 using System.Threading.Tasks;
 using Xamarin.Forms;
 using System.Text.Json;
+using System.Security.Cryptography;
+using MoneyCheck.Helpers;
 
 namespace MoneyCheck
 {
@@ -28,11 +30,14 @@ namespace MoneyCheck
         private async void EnterButton(object sender, EventArgs e)
         {
 
+            var passwordHash = MD5HasherHelper.CreateMD5(Password.Text);
 
-            var json = JsonSerializer.Serialize(new { Username = "user", PasswordHash = "user" });
+            var json = JsonSerializer.Serialize(new { Username = Login.Text, PasswordHash = passwordHash });
             var data = new StringContent(json, Encoding.UTF8, "application/json");
 
-            var url = "https://192.168.1.61:5001/auth/api/login";
+
+
+            var url = "http://192.168.1.69:5000/auth/api/login";
             var client = new HttpClient();
 
             var response = await client.PostAsync(url, data);
@@ -41,8 +46,11 @@ namespace MoneyCheck
 
             if(status == HttpStatusCode.Unauthorized)
             {
-                await DisplayAlert("Error", "Not authorizated", "OK");
+                await DisplayAlert("Error", "Unauthorized", "OK");
                 Environment.Exit(-1);
+            } else if(status == HttpStatusCode.BadRequest)
+            {
+                await DisplayAlert("Warning", "Not Found", "OK");
             }
             else if (status == HttpStatusCode.OK)
             {
